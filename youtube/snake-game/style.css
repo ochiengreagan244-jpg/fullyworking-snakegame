@@ -1,0 +1,192 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green: #4ade80;
+  --green-bright: #86efac;
+  --red: #ef4444;
+  --bg-dark: #0b1220;
+  --bg-mid: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+}
+
+html, body {
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 55%, #020617 100%);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ============ LAYOUT ============ */
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 12px;
+  }
+}
+
+/* ============ HUD (side panel) ============ */
+.hud {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .hud {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+  }
+}
+
+.logo {
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  color: var(--green);
+  text-shadow: 0 0 18px rgba(74, 222, 128, 0.7);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.logo span { font-size: 1.1rem; letter-spacing: 6px; }
+
+@media (max-width: 900px) {
+  .logo { font-size: 1.2rem; margin: 0; }
+  .logo span { font-size: 0.9rem; letter-spacing: 3px; }
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+}
+.stat .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.stat strong { color: var(--green-bright); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 900px) {
+  .stat { flex: 1 1 80px; padding: 6px 10px; }
+  .stat .label { font-size: 0.62rem; }
+  .stat strong { font-size: 1rem; }
+}
+
+.controls { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+@media (max-width: 900px) { .controls { flex-direction: row; margin: 0; } }
+
+.btn {
+  background: linear-gradient(180deg, #16a34a, #15803d);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, filter 0.12s;
+  box-shadow: 0 6px 14px rgba(22, 163, 74, 0.35);
+}
+.btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn:active { transform: translateY(1px); box-shadow: 0 2px 6px rgba(22,163,74,0.4); }
+
+.hint { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
+@media (max-width: 900px) { .hint { display: none; } }
+
+kbd {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  margin: 0 1px;
+}
+
+/* ============ STAGE ============ */
+.stage { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  padding: 3px;
+  background: linear-gradient(135deg, rgba(74,222,128,0.6), rgba(34,197,94,0.15), rgba(74,222,128,0.6));
+  box-shadow: 0 0 60px rgba(74, 222, 128, 0.25);
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--bg-dark);
+  border-radius: 15px;
+  touch-action: none;   /* stop mobile scroll while swiping */
+}
+
+/* ============ LEVEL SELECTOR ============ */
+.levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+}
+
+.level-btn {
+  flex: 1 1 auto;
+  min-width: 100px;
+  padding: 10px 14px;
+  background: rgba(30, 41, 59, 0.7);
+  color: var(--text);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.level-btn:hover { border-color: var(--green); color: var(--green-bright); }
+.level-btn.active {
+  background: linear-gradient(180deg, #16a34a, #15803d);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 0 22px rgba(74, 222, 128, 0.5);
+}
+
+/* ============ WASTED animation (CSS hook, drawn too) ============ */
+@keyframes wastedPulse {
+  0%   { opacity: 0; transform: scale(0.6); }
+  30%  { opacity: 1; transform: scale(1.08); }
+  60%  { transform: scale(1); }
+  100% { opacity: 1; transform: scale(1); }
+}

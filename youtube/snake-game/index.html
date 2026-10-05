@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🐍 Snake — Pro Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ======== SIDE HUD (tools) ======== -->
+    <aside class="hud">
+      <h1 class="logo">🐍<span>SNAKE</span></h1>
+
+      <div class="stat">
+        <span class="label">Score</span>
+        <strong id="score">0</strong>
+      </div>
+      <div class="stat">
+        <span class="label">Best</span>
+        <strong id="best">0</strong>
+      </div>
+      <div class="stat">
+        <span class="label">Length</span>
+        <strong id="length">3</strong>
+      </div>
+      <div class="stat">
+        <span class="label">Level</span>
+        <strong id="levelName">—</strong>
+      </div>
+
+      <div class="controls">
+        <button id="pauseBtn" class="btn">⏸ Pause</button>
+        <button id="restartBtn" class="btn">↺ Restart</button>
+      </div>
+
+      <p class="hint">
+        Desktop: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><br>
+        Mobile: <strong>swipe</strong> the canvas<br>
+        <kbd>Enter</kbd> start · <kbd>Space</kbd> pause
+      </p>
+    </aside>
+
+    <!-- ======== MAIN STAGE ======== -->
+    <main class="stage">
+      <div class="canvas-wrap">
+        <canvas id="gameCanvas" width="640" height="640"></canvas>
+      </div>
+
+      <!-- Level selector -->
+      <div class="levels" id="levelBar">
+        <button class="level-btn" data-level="amateur">🐢 Amateur</button>
+        <button class="level-btn" data-level="easy">🙂 Easy</button>
+        <button class="level-btn active" data-level="normal">🎯 Normal</button>
+        <button class="level-btn" data-level="hard">🔥 Hard</button>
+        <button class="level-btn" data-level="insane">💀 Insane</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
